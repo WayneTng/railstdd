@@ -1,14 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe ProductsController, type: :controller do
-  let!(:category) {Category.new(title: 'Ruby Programming')}
   
   describe '#index' do 
-    let!(:products) do
-      products = []
-      products << Product.create!(title: 'ruby', description: 'Ruby book', price: 12.99, category: category)
-      products << Product.create!(title: 'ruby', description: 'Ruby book', price: 12.99, category: category)
-    end
+    let!(:products) { create_list(:product, 2) }
 
     it 'get a list of products controller' do
       get :index
@@ -17,9 +12,24 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe '#show' do
-    let!(:product) {Product.create!(title: 'ruby', description: 'Ruby book', price: 12.99, category: category)}
-    it 'get a list of product for show' do
+    let!(:product) { create(:product) }
+    it 'get a product for show' do
       get :show, id: product
+      expect(assigns(:product).id).to eq product.id
+    end
+  end
+
+  describe '#new' do
+    it 'assigns an empty product instance' do
+      get :new
+      expect(assigns(:product)).to be_a Product
+    end
+  end
+
+  describe '#edit' do
+    let!(:product) { create(:product) }
+    it 'get the product information for edit' do
+      get :edit, id: product
       expect(assigns(:product).id).to eq product.id
     end
   end

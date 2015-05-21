@@ -5,8 +5,12 @@ FactoryGirl.define do
     price       12.99
     published   true
 
-    before(:create) do |product|
-      product.category = create(:category)
-    end
+    association :category
+    
+    #before(:create) do |product|
+    #  product.category = create(:category)
+    #end
+
+    #sequence(:email) {|n| "user-#(n)@example.com"}
   end
 end

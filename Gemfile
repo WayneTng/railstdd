@@ -42,6 +42,12 @@ group :development, :test do
   #install rspec-rails
   gem 'rspec-rails'
 
+  #pry
+  gem 'pry'
+
+  #install shouda-matchers
+  gem 'shoulda-matchers'
+
   #install awesome_print
   gem 'awesome_print'
 

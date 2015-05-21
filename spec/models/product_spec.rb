@@ -26,7 +26,15 @@ RSpec.describe Product, type: :model do
 
     it 'should make the title lower case before validating' do
       product.validate
-    expect(product.title).to eq 'ruby'
+      expect(product.title).to eq 'ruby'
+    end
+  end
+
+  describe '#title_shorter_than_description' do
+    let!(:product){Product.new(title: 'ruby programming', description: 'ruby')}
+    it 'title shorter than description' do
+      product.validate
+      expect(product.errors.messages).to include(description: ["can't be shorter than title"])
     end
   end
 end

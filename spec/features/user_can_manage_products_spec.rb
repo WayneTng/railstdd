@@ -6,7 +6,7 @@ RSpec.describe 'User can manage products', type: :feature do
   let!(:category_title) { product.category.title }
   it 'can create a product' do
     visit '/products'
-    expect(page).not_to have_content 'ruby book'
+    expect(page).not_to have_content product.title
     
     click_on 'Create a product'
     fill_in 'Title',        with: product.title

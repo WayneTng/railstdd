@@ -31,6 +31,7 @@ gem 'formtastic'
 # gem 'unicorn'
 
 gem 'paperclip'
+gem 'aws-sdk'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

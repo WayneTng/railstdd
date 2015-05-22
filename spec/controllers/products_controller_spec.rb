@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ProductsController, type: :controller do
-  
+
   describe '#index' do 
     let!(:products) { create_list(:product, 2) }
 
@@ -40,9 +40,9 @@ RSpec.describe ProductsController, type: :controller do
     end
 
     context 'success' do
-      let(:params) { attributes_for(:product, category_id: create(category)) }
-      
-      it 'saves a product' do
+      let(:params) { attributes_for(:product, category_id: create(:category)) }
+
+      it 'saves a product from create' do
         expect { do_request }.to change(Product, :count).by(1)
       end
 
@@ -61,4 +61,47 @@ RSpec.describe ProductsController, type: :controller do
       end
     end
   end
+
+  describe '#update' do
+    let!(:product) { create(:product) }
+    def do_request
+      patch :update, id: product, product: attributes_for(:product, title: 'java book')
+    end
+
+    it 'get the product id' do
+      do_request
+      expect(assigns(:product).id).to eq product.id 
+    end
+
+    context 'Success' do
+      it 'saves a product from update' do
+        do_request
+        expect(product.reload.title).to eq 'java book'
+      end
+
+      it 'redirect to edit page' do
+        do_request
+        expect(response).to redirect_to edit_product_url
+      end
+    end
+
+    context 'Failure' do
+      it 'render to view_new' do
+        patch :update, id: product, product: attributes_for(:product, title: '')
+        expect(response).to render_template :new
+      end
+    end
+  end
+
+ # describe 'destroy' do
+
+ #   def do_request
+ #     delete :destory, id: product
+ #   end
+
+ #   it 'get the product_id to delete' do
+ #     do_request
+ #     expect(assigns(:product).id).to eq product.id
+ #   end
+ # end
 end

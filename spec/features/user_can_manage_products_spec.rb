@@ -16,20 +16,16 @@ RSpec.describe 'User can manage products', type: :feature do
       select  category_title, from: 'Category'
       click_on 'Create Product'
       expect(page).to have_content product.title.downcase
-    end
-  end
-
-  describe 'edit a product' do
-    let!(:product){ create(:product) }
-    it 'can edit a product' do
-      visit '/products'
-      expect(page).to have_content product.title
-
+      
       click_on 'Edit'
       fill_in 'Title', with: 'Java Book'
       click_on 'Update Product'
-      ap page.body
       expect(find_field('Title').value).to have_content 'java book'
+
+      visit '/products'
+      expect(page).to have_content product.title.downcase
+      click_on 'Delete'
+      expect(page).not_to have_content product.title
     end
   end
 end

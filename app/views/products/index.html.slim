@@ -1,4 +1,6 @@
 = link_to 'Create a product', new_product_path
 
-= @products.each do |product|
+- @products.each do |product|
   = product.title
+  = product.description
+  = link_to 'Edit', edit_product_path(product)

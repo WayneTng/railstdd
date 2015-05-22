@@ -19,7 +19,6 @@ class ProductsController < ApplicationController
 
   def update
     @product = Product.find(product_id)
-    product_params = product_information
 
     if @product.update(product_params)
       redirect_to edit_product_url(@product)
@@ -29,7 +28,6 @@ class ProductsController < ApplicationController
   end
 
   def create
-    product_params = product_information
     @product = Product.new(product_params) 
     if @product.save
       redirect_to products_url
@@ -44,15 +42,21 @@ class ProductsController < ApplicationController
     if @product.destroy
       redirect_to products_url
     else
-      raise 'There is an error while trying to delete product id: #{@product.id}'
+      raise "There is an error while trying to delete product id: #{@product.id}"
     end
   end
+
+  private
 
   def product_id
     params.require(:id)
   end
 
-  def product_information
-    params.require(:product).permit(:title, :description, :price, :published, :category_id)
+  def product_params
+    params.require(:product).permit(:title, 
+                                    :description, 
+                                    :price, 
+                                    :published, 
+                                    :category_id)
   end
 end

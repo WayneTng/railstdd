@@ -63,31 +63,33 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe '#update' do
-    let!(:product) { create(:product) }
     def do_request
-      patch :update, id: product, product: attributes_for(:product, title: 'java book')
+      patch :update, id: product, product: params
     end
 
+    let!(:product) { create(:product) }
+    let(:params) { attributes_for(:product, title: 'java book') }
+
+    before { do_request }
+
     it 'get the product id' do
-      do_request
       expect(assigns(:product).id).to eq product.id 
     end
 
     context 'Success' do
       it 'saves a product from update' do
-        do_request
         expect(product.reload.title).to eq 'java book'
       end
 
       it 'redirect to edit page' do
-        do_request
         expect(response).to redirect_to edit_product_url
       end
     end
 
     context 'Failure' do
+      let(:params) { attributes_for(:product, title: '') }
+
       it 'render to view_new' do
-        patch :update, id: product, product: attributes_for(:product, title: '')
         expect(response).to render_template :new
       end
     end
@@ -102,6 +104,10 @@ RSpec.describe ProductsController, type: :controller do
     it 'get the product_id to delete' do
       do_request
       expect(assigns(:product).id).to eq product.id
+    end
+
+    it 'successfully delete the product' do
+      expect{ do_request }.to change( Product, :count ).by(-1)
     end
   end
 end

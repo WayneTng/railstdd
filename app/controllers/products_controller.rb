@@ -37,6 +37,16 @@ class ProductsController < ApplicationController
       render :new
     end
   end
+  
+  def destroy
+    @product = Product.find(product_id) 
+
+    if @product.destroy
+      redirect_to products_url
+    else
+      raise 'There is an error while trying to delete product id: #{@product.id}'
+    end
+  end
 
   def product_id
     params.require(:id)

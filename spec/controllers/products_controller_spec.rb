@@ -93,15 +93,15 @@ RSpec.describe ProductsController, type: :controller do
     end
   end
 
- # describe 'destroy' do
+  describe '#destroy' do
+    let!(:product){ create(:product) }
+    def do_request
+      delete :destroy, id: product
+    end
 
- #   def do_request
- #     delete :destory, id: product
- #   end
-
- #   it 'get the product_id to delete' do
- #     do_request
- #     expect(assigns(:product).id).to eq product.id
- #   end
- # end
+    it 'get the product_id to delete' do
+      do_request
+      expect(assigns(:product).id).to eq product.id
+    end
+  end
 end

@@ -12,5 +12,3 @@ Category.destroy_all
 
 ruby_category = Category.create!(title: 'Ruby Programming')
 java_category = Category.create!(title: 'Java Programming')
-
-Product.create!(title: "ruby book", description: 'this is ruby book programming', price: 10, published: true, category: ruby_category)

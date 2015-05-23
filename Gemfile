@@ -29,7 +29,6 @@ gem 'slim-rails'
 gem 'formtastic'
 # Use Unicorn as the app server
 # gem 'unicorn'
-
 gem 'paperclip'
 gem 'aws-sdk'
 # Use Capistrano for deployment
@@ -44,6 +43,7 @@ group :development, :test do
   #install rspec-rails
   gem 'rspec-rails'
 
+  gem 'dotenv-rails'
   #pry
   gem 'pry'
 

@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150523031035) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "categories", force: :cascade do |t|
     t.string   "title"
     t.datetime "created_at"
@@ -33,6 +36,6 @@ ActiveRecord::Schema.define(version: 20150523031035) do
     t.datetime "image_updated_at"
   end
 
-  add_index "products", ["category_id"], name: "index_products_on_category_id"
+  add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
 
 end

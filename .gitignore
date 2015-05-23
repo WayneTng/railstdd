@@ -14,7 +14,7 @@
 *.DS_STORE
 
 #ignore secret.yml
-secrets.yml
+config/secrets.yml
 
 #ignore all env file
 *.ENV

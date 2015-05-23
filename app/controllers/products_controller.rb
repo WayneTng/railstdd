@@ -57,6 +57,7 @@ class ProductsController < ApplicationController
                                     :description, 
                                     :price, 
                                     :published, 
+                                    :image,
                                     :category_id)
   end
 end

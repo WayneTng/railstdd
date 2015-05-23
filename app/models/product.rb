@@ -13,8 +13,13 @@ class Product < ActiveRecord::Base
   validate :strip_html_from_description 
   validate :title_shorter_than_description
   #validates_attachment :image, content_type: {content_type: ["image/jpg", "image/gif", "image/png"]},
-  #validates_attachment_presence :image
-  validates_attachment_content_type :image, content_type: {content_type: ["image/png", "image/jpeg", "image/gif"]}
+  validates_attachment_presence :image
+  validates_attachment_content_type :image, content_type: {content_type: ["image/jpg",
+                                                                          "image/png", 
+                                                                          "image/jpeg", 
+                                                                          "image/gif", 
+                                                                          "image/pjpeg", 
+                                                                          "image/x-png"]}
   validates_attachment_size :image, in: 0..3.megabytes, message: "file size cannot be larger than 3MB"
 
   def strip_html_from_description

@@ -28,7 +28,7 @@ gem 'formtastic'
 # Use Unicorn as the app server
 # gem 'unicorn'
 gem 'paperclip'
-gem 'aws-sdk'
+gem 'aws-sdk', '< 2.0'
 gem 'pg'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
